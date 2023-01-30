@@ -44,7 +44,7 @@ class Example(QWidget):
     def initUI(self):
         self.setGeometry(100, 100, *SCREEN_SIZE)
         self.setWindowTitle('Отображение карты')
-        #self.reload()
+        # self.reload()
 
     def reload(self):
         self.pixmap.loadFromData(self.response.content)
@@ -62,6 +62,43 @@ class Example(QWidget):
             self.map_params['z'] = self.zoom
             self.getImage()
             self.reload()
+
+        if event.key() == Qt.Key_Up:
+            new_ll = list(map(float, self.ll.split(',')))
+            new_ll[1] += 0.001
+            new_ll = list(map(str, new_ll))
+            self.ll = ','.join(new_ll)
+            self.map_params['ll'] = self.ll
+            self.getImage()
+            self.reload()
+
+        if event.key() == Qt.Key_Down:
+            new_ll = list(map(float, self.ll.split(',')))
+            new_ll[1] -= 0.001
+            new_ll = list(map(str, new_ll))
+            self.ll = ','.join(new_ll)
+            self.map_params['ll'] = self.ll
+            self.getImage()
+            self.reload()
+
+        if event.key() == Qt.Key_Right:
+            new_ll = list(map(float, self.ll.split(',')))
+            new_ll[0] += 0.001
+            new_ll = list(map(str, new_ll))
+            self.ll = ','.join(new_ll)
+            self.map_params['ll'] = self.ll
+            self.getImage()
+            self.reload()
+
+        if event.key() == Qt.Key_Left:
+            new_ll = list(map(float, self.ll.split(',')))
+            new_ll[0] -= 0.001
+            new_ll = list(map(str, new_ll))
+            self.ll = ','.join(new_ll)
+            self.map_params['ll'] = self.ll
+            self.getImage()
+            self.reload()
+
 
 
 if __name__ == '__main__':
